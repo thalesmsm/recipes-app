@@ -23,12 +23,12 @@ describe('Testando a página de Login', () => {
     const inputPassword = screen.getByPlaceholderText(/senha/i);
     const buttonLogin = screen.getByRole('button', {  name: /entrar/i})
         
-    userEvent.type(inputEmail, '{selectall}teste')
+    userEvent.type(inputEmail, 'teste')
     userEvent.type(inputPassword, '123')
     
     expect(buttonLogin.disabled).toBeTruthy();
     
-    userEvent.type(inputEmail, 'teste@teste.com')
+    userEvent.type(inputEmail, '{selectall}teste@teste.com')
     userEvent.type(inputPassword, '1234567')
     
     expect(buttonLogin.disabled).toBeFalsy();
