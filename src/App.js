@@ -10,22 +10,25 @@ import DrinksInProgress from './pages/DrinksInProgress';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import Profile from './pages/Profile';
+import RecipesProvider from './context/RecipesContext';
 
 function App() {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={ Login } />
-        <Route path="/foods" exact component={ Foods } />
-        <Route path="/foods/:id" exact component={ FoodsDetails } />
-        <Route path="/foods/:id/in-progress" exact component={ FoodsInProgress } />
-        <Route path="/drinks" exact component={ Drinks } />
-        <Route path="/drinks/:id" exact component={ DrinksDetails } />
-        <Route path="/drinks/:id/in-progress" exact component={ DrinksInProgress } />
-        <Route path="/done-recipes" exact component={ DoneRecipes } />
-        <Route path="/favorite-recipes" exact component={ FavoriteRecipes } />
-        <Route path="/profile" exact component={ Profile } />
-      </Switch>
+      <RecipesProvider>
+        <Switch>
+          <Route path="/" exact component={ Login } />
+          <Route path="/foods" exact component={ Foods } />
+          <Route path="/foods/:id" exact component={ FoodsDetails } />
+          <Route path="/foods/:id/in-progress" exact component={ FoodsInProgress } />
+          <Route path="/drinks" exact component={ Drinks } />
+          <Route path="/drinks/:id" exact component={ DrinksDetails } />
+          <Route path="/drinks/:id/in-progress" exact component={ DrinksInProgress } />
+          <Route path="/done-recipes" exact component={ DoneRecipes } />
+          <Route path="/favorite-recipes" exact component={ FavoriteRecipes } />
+          <Route path="/profile" exact component={ Profile } />
+        </Switch>
+      </RecipesProvider>
     </BrowserRouter>
   );
 }
