@@ -41,11 +41,50 @@ export default function Header({ title, hasSearch }) {
           : <button type="button" className="transparent-btn">-</button>}
       </div>
       { visibleSearch && (
-        <input
-          type="text"
-          data-testid="search-input"
-          className="input-search scale-in-tr"
-        />
+        <div>
+          <div>
+            <input
+              type="text"
+              data-testid="search-input"
+              className="input-search scale-in-tr"
+            />
+          </div>
+          <div>
+            <label htmlFor="ingredient">
+              Ingredient
+              <input
+                type="radio"
+                name="filters"
+                id="ingredient"
+                data-testid="ingredient-search-radio"
+              />
+            </label>
+            <label htmlFor="name">
+              Name
+              <input
+                type="radio"
+                name="filters"
+                id="name"
+                data-testid="name-search-radio"
+              />
+            </label>
+            <label htmlFor="firstletter">
+              First Letter
+              <input
+                type="radio"
+                name="filters"
+                id="firstletter"
+                data-testid="first-letter-search-radio"
+              />
+            </label>
+            <button
+              type="button"
+              data-testid="exec-search-btn"
+            >
+              Search
+            </button>
+          </div>
+        </div>
       ) }
     </header>
   );
