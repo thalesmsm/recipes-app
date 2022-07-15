@@ -16,23 +16,23 @@ body {
 }
 
 form {
+  background-color: #ffc52e;
   border-radius: 5px;
-  background-color: #FFC52E;
-  height: 320px;
-  padding: 20px;
   display: flex;
   flex-direction: column;
+  height: 320px;
   justify-content: center;
+  padding: 20px;
 }
 
 input {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  display: inline-block;
+  margin: 8px 0;
+  padding: 12px 20px;
+  width: 100%;
 }
 
 input:focus {
@@ -40,14 +40,14 @@ input:focus {
 }
 
 .btn-login {
-  transition-duration: 0.4s;
   background-color: #db2a19;
-  color: black;
   border: 2px solid #db2a19;
   border-radius: 4px;
-  padding: 10px 24px;
-  font-weight: bold;
+  color: black;
+  font-weight: 700;
   letter-spacing: 0.8px;
+  padding: 10px 24px;
+  transition-duration: 0.4s;
 }
 
 .btn-login:hover {
@@ -56,12 +56,11 @@ input:focus {
 }
 
 .disabled {
-  color: rgba(0, 0, 0, 0.445);
   border: 2px solid #db291965;
   border-radius: 4px;
-  letter-spacing: 0.8px;
-
-  padding: 10px 24px;
-  opacity: 1;
+  color: rgba(0, 0, 0, 0.445);
   cursor: not-allowed;
+  letter-spacing: 0.8px;
+  opacity: 1;
+  padding: 10px 24px;
 }
