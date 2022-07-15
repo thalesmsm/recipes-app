@@ -15,7 +15,7 @@ export default function Footer() {
           <img
             src={ mealIcon }
             alt="dirnk-icon"
-            data-testid="foods-bottom-btn"
+            data-testid="food-bottom-btn"
           />
         </button>
       </Link>
