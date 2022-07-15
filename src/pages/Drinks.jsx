@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import { RecipesContext } from '../context/RecipesContext';
 import DrinkCard from '../components/DrinkCard';
+import Footer from '../components/Footer';
 
 export default function Drinks() {
   const { recipe, fetchRecipes } = useContext(RecipesContext);
@@ -42,6 +43,7 @@ export default function Drinks() {
           />
         )) }
       </div>
+      <Footer />
     </div>
   );
 }
