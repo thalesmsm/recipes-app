@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import FetchFoods from '../services/FetchFoods';
+import FetchDrink from '../services/FetchDrinks';
 import { RecipesContext } from '../context/RecipesContext';
 import '../css/Header.css';
 
@@ -12,6 +13,7 @@ export default function Header({ title, hasSearch }) {
   const [optionInput, setOptionInput] = useState(null);
   const [searchRecipeName, setSearchRecipeName] = useState('');
   const { filter, handleChangeByFilter, fetchRecipes } = useContext(RecipesContext);
+  const { pathname } = useLocation();
 
   function handleByName({ target }) {
     const { value } = target;
@@ -25,7 +27,7 @@ export default function Header({ title, hasSearch }) {
     setOptionInput(value);
   }
 
-  async function handleClickSearch() {
+  async function handleClickSearchFood() {
     const { option, searchByName } = filter;
 
     if (option === 'ingredient') {
@@ -43,6 +45,30 @@ export default function Header({ title, hasSearch }) {
         global.alert('Your search must have only 1 (one) character');
       }
       const recipeFirstLetter = await FetchFoods.fetchByFirstLetter(
+        searchByName,
+      );
+      fetchRecipes(recipeFirstLetter);
+    }
+  }
+
+  async function handleClickSearchDrink() {
+    const { option, searchByName } = filter;
+
+    if (option === 'ingredient') {
+      const recipeIngredient = await FetchDrink.fetchByIngredient(searchByName);
+      fetchRecipes(recipeIngredient);
+    }
+
+    if (option === 'name') {
+      const recipeName = await FetchDrink.fetchByName(searchByName);
+      fetchRecipes(recipeName);
+    }
+
+    if (option === 'firstletter') {
+      if (searchByName.length > 1) {
+        global.alert('Your search must have only 1 (one) character');
+      }
+      const recipeFirstLetter = await FetchDrink.fetchByFirstLetter(
         searchByName,
       );
       fetchRecipes(recipeFirstLetter);
@@ -135,7 +161,8 @@ export default function Header({ title, hasSearch }) {
             <button
               type="button"
               data-testid="exec-search-btn"
-              onClick={ handleClickSearch }
+              onClick={ pathname === '/foods'
+                ? handleClickSearchFood : handleClickSearchDrink }
             >
               Search
             </button>
