@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../css/Cards.css';
 
 export default function FoodCard({ recipeF, index }) {
   return (
     <div
+      className="card"
       data-testid={ `${index}-recipe-card` }
     >
       <img
