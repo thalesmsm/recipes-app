@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import '../css/Login.css';
 
 export default function Login() {
   const [userEmail, setUserEmail] = useState('');
@@ -43,32 +44,40 @@ export default function Login() {
   }
 
   return (
-    <form>
-      <input
-        data-testid="email-input"
-        id="email"
-        name="email"
-        type="email"
-        placeholder="Email"
-        onChange={ handleChangeEmail }
-      />
-      <input
-        data-testid="password-input"
-        id="password"
-        name="password"
-        type="password"
-        placeholder="Senha"
-        onChange={ handleChangePassword }
-      />
-      <button
-        type="submit"
-        name="submitButton"
-        data-testid="login-submit-btn"
-        disabled={ !validLogin() }
-        onClick={ handleClickLoginButton }
-      >
-        Entrar
-
-      </button>
-    </form>);
+    <div className="form-container">
+      <form>
+        <input
+          data-testid="email-input"
+          id="email"
+          name="email"
+          type="email"
+          placeholder="Email"
+          onChange={ handleChangeEmail }
+        />
+        <input
+          data-testid="password-input"
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Senha"
+          onChange={ handleChangePassword }
+        />
+        <button
+          type="submit"
+          name="submitButton"
+          data-testid="login-submit-btn"
+          disabled={ !validLogin() }
+          onClick={ handleClickLoginButton }
+          className={
+            `${
+              !validLogin()
+                ? 'disabled'
+                : 'btn-login'} `
+          }
+        >
+          Entrar
+        </button>
+      </form>
+    </div>
+  );
 }
