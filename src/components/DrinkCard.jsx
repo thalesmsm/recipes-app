@@ -7,14 +7,14 @@ export default function FoodCard({ recipeF, index }) {
       data-testid={ `${index}-recipe-card` }
     >
       <img
-        src={ recipeF.strMealThumb }
-        alt={ recipeF.strMeal }
+        src={ recipeF.strDrinkThumb }
+        alt={ recipeF.strDrink }
         data-testid={ `${index}-card-img` }
       />
       <h2
         data-testid={ `${index}-card-name` }
       >
-        { recipeF.strMeal }
+        { recipeF.strDrink }
       </h2>
     </div>
   );

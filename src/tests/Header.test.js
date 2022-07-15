@@ -1,12 +1,19 @@
 import React from 'react';
-import Foods from '../pages/Foods';
+import App from '../App';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
-import renderWithRouter from '../helpers/renderWithRouter';
 
 describe('Testando o componente Header', () => {
     test('Verifique se o header é renderizado corretamente', () => {
-        renderWithRouter(<Foods />);
+        render(<App />);
+        const inputEmail = screen.getByRole('textbox');
+        const inputPassword = screen.getByPlaceholderText(/senha/i);
+        const buttonLogin = screen.getByRole('button', {  name: /entrar/i})
+    
+        userEvent.type(inputEmail, 'teste@teste.com')
+        userEvent.type(inputPassword, '1234567')
+        userEvent.click(buttonLogin)
+  
         const imgProfile = screen.getByTestId('profile-top-btn')
         const title = screen.getByTestId('page-title')
         const imgSearch = screen.getByTestId('search-top-btn')
@@ -17,7 +24,7 @@ describe('Testando o componente Header', () => {
     })
 
     test('Verifique se ao clicar no icone de pesquisa o input aparece', () => {
-        renderWithRouter(<Foods />);
+        render(<App />);
         const imgSearch = screen.getByTestId('search-top-btn')
         userEvent.click(imgSearch)
         
@@ -26,7 +33,7 @@ describe('Testando o componente Header', () => {
     })
 
     test('Verifique se contém options no input de pesquisa', () => {
-        renderWithRouter(<Foods />);
+        render(<App />);
         const imgSearch = screen.getByTestId('search-top-btn')
         userEvent.click(imgSearch)
 
@@ -38,5 +45,8 @@ describe('Testando o componente Header', () => {
         
         const optionFirstLetter =  screen.getByRole('radio', {  name: /first letter/i})
         expect(optionFirstLetter).toBeInTheDocument()
+    })
+    
+    test('Verifique se ao pesquisar por ingrediente é renderizado na tela', () => {
     })
 })
