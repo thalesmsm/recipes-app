@@ -6,7 +6,7 @@ import DrinkCard from '../components/DrinkCard';
 import Footer from '../components/Footer';
 
 export default function Drinks() {
-  const { recipe, fetchRecipes } = useContext(RecipesContext);
+  const { recipe, setRecipe } = useContext(RecipesContext);
   const { drinks } = recipe;
   const history = useHistory();
 
@@ -17,7 +17,7 @@ export default function Drinks() {
     }
     if (!drinks) {
       global.alert(`${''}Sorry, we haven't found any recipes for these filters.`);
-      fetchRecipes([]);
+      setRecipe([]);
     }
   }, [drinks]);
 
