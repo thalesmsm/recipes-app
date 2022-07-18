@@ -1,4 +1,31 @@
+.card {
+  align-items: center;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+  padding: 8px;
+  position: relative;
+  top: 52px;
+}
+
 .card > img {
-  height: 175px;
-  width: 175px;
+  border-radius: 6px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.411);
+  height: 300px;
+  width: 300px;
+}
+
+.card h2 {
+  align-self: flex-start;
+  color: white;
+  font-size: 1.4rem;
+  max-height: 20px;
+  max-width: 280px;
+  position: relative;
+  right: -30px;
+  text-shadow: 1.5px 1.5px 5px #220f08;
+  -webkit-text-stroke-color: #502314;
+  -webkit-text-stroke-width: 0.6px;
+  top: -55px;
 }

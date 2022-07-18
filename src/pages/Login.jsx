@@ -46,12 +46,14 @@ export default function Login() {
   return (
     <div className="form-container">
       <form>
+        <h1>RECIPES</h1>
         <input
           data-testid="email-input"
           id="email"
           name="email"
           type="email"
           placeholder="Email"
+          className="input-login"
           onChange={ handleChangeEmail }
         />
         <input
@@ -60,6 +62,7 @@ export default function Login() {
           name="password"
           type="password"
           placeholder="Senha"
+          className="input-login"
           onChange={ handleChangePassword }
         />
         <button
