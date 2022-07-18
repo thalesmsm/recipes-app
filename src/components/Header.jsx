@@ -22,23 +22,22 @@ export default function Header({ title, hasSearch }) {
           </button>
         </Link>
         <h1 data-testid="page-title">{title}</h1>
-        {hasSearch ? (
-          <button
-            type="button"
-            onClick={ () => setVisibleSearch(!visibleSearch) }
-            className="header-btn"
-          >
-            <img
-              src={ searchIcon }
-              alt="profile-icon"
-              data-testid="search-top-btn"
-            />
-          </button>
-        ) : (
-          <button type="button" className="transparent-btn">
-            -
-          </button>
-        )}
+        {
+          hasSearch
+          && (
+            <button
+              type="button"
+              onClick={ () => setVisibleSearch(!visibleSearch) }
+              className="header-btn"
+            >
+              <img
+                src={ searchIcon }
+                alt="profile-icon"
+                data-testid="search-top-btn"
+              />
+            </button>
+          )
+        }
       </div>
       {visibleSearch && <SearchBar /> }
     </header>
