@@ -16,7 +16,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0.75rem;
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   z-index: 10;
 }

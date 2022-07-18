@@ -2,24 +2,55 @@ import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import { RecipesContext } from '../context/RecipesContext';
-import DrinkCard from '../components/DrinkCard';
 import Footer from '../components/Footer';
+import Recipes from '../components/Recipes';
+import FetchDrinks from '../services/FetchDrinks';
 
 export default function Drinks() {
-  const { recipe, setRecipe } = useContext(RecipesContext);
-  const { drinks } = recipe;
+  const { recipe, fetchRecipes,
+    categoryName, setCategoryName, clicked, setClicked } = useContext(RecipesContext);
   const history = useHistory();
 
   useEffect(() => {
-    if (drinks && drinks.length === 1) {
-      const drinkId = drinks[0].idDrink;
-      history.push(`/drinks/${drinkId}`);
+    if (recipe && recipe.length === 1) {
+      const drinkId = recipe[0].idDrink;
+      const sec = 500;
+      setTimeout(() => {
+        history.push(`/drinks/${drinkId}`);
+      }, sec);
     }
-    if (!drinks) {
+    if (!recipe) {
       global.alert(`${''}Sorry, we haven't found any recipes for these filters.`);
-      setRecipe([]);
+      fetchRecipes([]);
     }
-  }, [drinks]);
+  }, [recipe]);
+
+  useEffect(() => {
+    FetchDrinks.fetch12recipes().then((results) => fetchRecipes(results));
+  }, []);
+
+  const fiveCategories = async () => {
+    const categories = await FetchDrinks.fetchByCategoriesDrinks();
+    setCategoryName(categories);
+  };
+
+  const buttonAll = async () => {
+    FetchDrinks.fetch12recipes().then((results) => fetchRecipes(results));
+  };
+
+  const getDrinksByCategories = async ({ target: { value } }) => {
+    const drinksByCategories = await FetchDrinks.fetchByNameCategories(value);
+    fetchRecipes(drinksByCategories);
+    setClicked(true);
+    if (clicked) {
+      setClicked(false);
+      return buttonAll();
+    }
+  };
+
+  useEffect(() => {
+    fiveCategories();
+  }, []);
 
   function recipeFilterLimit(arr) {
     const limit = 12;
@@ -35,9 +66,26 @@ export default function Drinks() {
       <div>
         <Header title="Drinks" hasSearch />
       </div>
+      <button
+        type="button"
+        onClick={ buttonAll }
+        data-testid="All-category-filter"
+      >
+        All
+      </button>
+      { categoryName.map(({ strCategory }) => (
+        <button
+          type="button"
+          onClick={ getDrinksByCategories }
+          value={ strCategory }
+          key={ strCategory }
+          data-testid={ `${strCategory}-category-filter` }
+        >
+          { strCategory }
+        </button>)) }
       <div>
-        { !!drinks && recipeFilterLimit(drinks).map((recipeF, index) => (
-          <DrinkCard
+        { !!recipe && recipeFilterLimit(recipe).map((recipeF, index) => (
+          <Recipes
             key={ recipeF.idDrink }
             recipeF={ recipeF }
             index={ index }
