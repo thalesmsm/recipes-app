@@ -6,7 +6,7 @@ import FoodCard from '../components/FoodCard';
 import Footer from '../components/Footer';
 
 export default function Foods() {
-  const { recipe, fetchRecipes } = useContext(RecipesContext);
+  const { recipe, setRecipe } = useContext(RecipesContext);
   const { foods } = recipe;
   const history = useHistory();
 
@@ -17,7 +17,7 @@ export default function Foods() {
     }
     if (!foods) {
       global.alert(`${''}Sorry, we haven't found any recipes for these filters.`);
-      fetchRecipes([]);
+      setRecipe([]);
     }
   }, [foods]);
 
