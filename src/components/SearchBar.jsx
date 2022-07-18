@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { RecipesContext } from '../context/RecipesContext';
 import FetchFoods from '../services/FetchFoods';
 import FetchDrink from '../services/FetchDrinks';
+import '../css/SearchBar.css';
 
 export default function SearchBar() {
   const [optionInput, setOptionInput] = useState(null);
@@ -79,17 +80,17 @@ export default function SearchBar() {
   }, [optionInput, searchRecipeName]);
 
   return (
-    <div>
+    <div className="search-bar-container">
       <div>
         <input
           type="text"
           data-testid="search-input"
-          className="input-search scale-in-tr"
+          className="input-search"
           onChange={ handleByName }
         />
       </div>
-      <div>
-        <label htmlFor="ingredient">
+      <div className="radios-container">
+        <label htmlFor="ingredient" className="label-container">
           Ingredient
           <input
             type="radio"
@@ -97,10 +98,12 @@ export default function SearchBar() {
             id="ingredient"
             value="ingredient"
             data-testid="ingredient-search-radio"
+            className="input-radio"
             onChange={ handleByOptionInput }
           />
+          <span className="checkmark" />
         </label>
-        <label htmlFor="name">
+        <label htmlFor="name" className="label-container">
           Name
           <input
             type="radio"
@@ -108,10 +111,12 @@ export default function SearchBar() {
             id="name"
             value="name"
             data-testid="name-search-radio"
+            className="input-radio"
             onChange={ handleByOptionInput }
           />
+          <span className="checkmark" />
         </label>
-        <label htmlFor="firstletter">
+        <label htmlFor="firstletter" className="label-container">
           First Letter
           <input
             type="radio"
@@ -119,18 +124,21 @@ export default function SearchBar() {
             id="firstletter"
             value="firstletter"
             data-testid="first-letter-search-radio"
+            className="input-radio"
             onChange={ handleByOptionInput }
           />
+          <span className="checkmark" />
         </label>
-        <button
-          type="button"
-          data-testid="exec-search-btn"
-          onClick={ pathname === '/foods'
-            ? handleClickSearchFood : handleClickSearchDrink }
-        >
-          Search
-        </button>
       </div>
+      <button
+        type="button"
+        data-testid="exec-search-btn"
+        className="search-btn"
+        onClick={ pathname === '/foods'
+          ? handleClickSearchFood : handleClickSearchDrink }
+      >
+        Search
+      </button>
     </div>
   );
 }
