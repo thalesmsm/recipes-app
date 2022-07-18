@@ -2,10 +2,11 @@ import React from 'react';
 import App from '../App';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import renderWithRouter from '../helpers/renderWithRouter';
 
 describe('Testando Footer', () => {
   test('Verifique se o componente Footer é renderizado corretamente', () => {
-    render(<App />);
+    renderWithRouter(<App />);
     const inputEmail = screen.getByRole('textbox');
     const inputPassword = screen.getByPlaceholderText(/senha/i);
     const buttonLogin = screen.getByRole('button', {  name: /entrar/i});
