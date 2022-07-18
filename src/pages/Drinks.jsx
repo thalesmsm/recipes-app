@@ -7,18 +7,19 @@ import Footer from '../components/Footer';
 
 export default function Drinks() {
   const { recipe, fetchRecipes } = useContext(RecipesContext);
+  const { drinks } = recipe;
   const history = useHistory();
 
   useEffect(() => {
-    if (recipe && recipe.length === 1) {
-      const drinkId = recipe[0].idDrink;
+    if (drinks && drinks.length === 1) {
+      const drinkId = drinks[0].idDrink;
       history.push(`/drinks/${drinkId}`);
     }
-    if (!recipe) {
+    if (!drinks) {
       global.alert(`${''}Sorry, we haven't found any recipes for these filters.`);
       fetchRecipes([]);
     }
-  }, [recipe]);
+  }, [drinks]);
 
   function recipeFilterLimit(arr) {
     const limit = 12;
@@ -35,7 +36,7 @@ export default function Drinks() {
         <Header title="Drinks" hasSearch />
       </div>
       <div>
-        { !!recipe && recipeFilterLimit(recipe).map((recipeF, index) => (
+        { !!drinks && recipeFilterLimit(drinks).map((recipeF, index) => (
           <DrinkCard
             key={ recipeF.idDrink }
             recipeF={ recipeF }

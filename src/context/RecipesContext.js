@@ -9,13 +9,16 @@ export default function RecipesProvider({ children }) {
     searchByName: '',
   });
 
-  const [recipe, setRecipe] = useState([]);
+  const [recipe, setRecipe] = useState({
+    foods: [],
+    drinks: [],
+  });
 
   const initialContext = {
     filter,
     recipe,
     handleChangeByFilter: (filtered) => setFilter(filtered),
-    fetchRecipes: (results) => setRecipe(results),
+    setRecipe,
   };
 
   return (
