@@ -8,7 +8,7 @@ import '../css/SearchBar.css';
 export default function SearchBar() {
   const [optionInput, setOptionInput] = useState(null);
   const [searchRecipeName, setSearchRecipeName] = useState('');
-  const { filter, handleChangeByFilter, setRecipe } = useContext(RecipesContext);
+  const { filter, handleChangeByFilter, fetchRecipes } = useContext(RecipesContext);
   const { pathname } = useLocation();
 
   function handleByName({ target }) {
@@ -28,12 +28,12 @@ export default function SearchBar() {
 
     if (option === 'ingredient') {
       const recipeIngredient = await FetchFoods.fetchByIngredient(searchByName);
-      setRecipe((pState) => ({ ...pState, foods: recipeIngredient }));
+      fetchRecipes(recipeIngredient);
     }
 
     if (option === 'name') {
       const recipeName = await FetchFoods.fetchByName(searchByName);
-      setRecipe((pState) => ({ ...pState, foods: recipeName }));
+      fetchRecipes(recipeName);
     }
 
     if (option === 'firstletter') {
@@ -43,7 +43,7 @@ export default function SearchBar() {
       const recipeFirstLetter = await FetchFoods.fetchByFirstLetter(
         searchByName,
       );
-      setRecipe((pState) => ({ ...pState, foods: recipeFirstLetter }));
+      fetchRecipes(recipeFirstLetter);
     }
   }
 
@@ -52,14 +52,12 @@ export default function SearchBar() {
 
     if (option === 'ingredient') {
       const recipeIngredient = await FetchDrink.fetchByIngredient(searchByName);
-      // fetchRecipes(recipeIngredient);
-      setRecipe((pState) => ({ ...pState, drinks: recipeIngredient }));
+      fetchRecipes(recipeIngredient);
     }
 
     if (option === 'name') {
       const recipeName = await FetchDrink.fetchByName(searchByName);
-      // fetchRecipes(recipeName);
-      setRecipe((pState) => ({ ...pState, drinks: recipeName }));
+      fetchRecipes(recipeName);
     }
 
     if (option === 'firstletter') {
@@ -69,8 +67,7 @@ export default function SearchBar() {
       const recipeFirstLetter = await FetchDrink.fetchByFirstLetter(
         searchByName,
       );
-      // fetchRecipes(recipeFirstLetter);
-      setRecipe((pState) => ({ ...pState, drinks: recipeFirstLetter }));
+      fetchRecipes(recipeFirstLetter);
     }
   }
 

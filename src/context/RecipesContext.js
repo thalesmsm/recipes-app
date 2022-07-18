@@ -9,16 +9,19 @@ export default function RecipesProvider({ children }) {
     searchByName: '',
   });
 
-  const [recipe, setRecipe] = useState({
-    foods: [],
-    drinks: [],
-  });
+  const [recipe, setRecipe] = useState([]);
+  const [categoryName, setCategoryName] = useState([]);
+  const [clicked, setClicked] = useState(false);
 
   const initialContext = {
     filter,
     recipe,
     handleChangeByFilter: (filtered) => setFilter(filtered),
-    setRecipe,
+    fetchRecipes: (results) => setRecipe(results),
+    categoryName,
+    setCategoryName,
+    clicked,
+    setClicked,
   };
 
   return (
