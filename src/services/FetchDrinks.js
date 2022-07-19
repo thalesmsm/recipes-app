@@ -37,6 +37,12 @@ class FetchDrinks {
     const limit = 12;
     return drinks.slice(0, limit);
   }
+
+  async fetchDrinksDetails(recipeId) {
+    const { drinks } = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${recipeId}`).then((response) => response.json());
+
+    return drinks;
+  }
 }
 
 export default new FetchDrinks();

@@ -37,6 +37,12 @@ class FetchFoods {
     const limit = 12;
     return meals.slice(0, limit);
   }
+
+  async fetchFoodDetails(recipeId) {
+    const { meals } = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`).then((response) => response.json());
+
+    return meals;
+  }
 }
 
 export default new FetchFoods();
