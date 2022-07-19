@@ -21,9 +21,9 @@ export default function Drinks() {
     }
     if (!recipe) {
       global.alert(`${''}Sorry, we haven't found any recipes for these filters.`);
-      fetchRecipes([]);
+      FetchDrinks.fetch12recipes().then((results) => fetchRecipes(results));
     }
-  }, [recipe]);
+  }, [recipe, history]);
 
   useEffect(() => {
     FetchDrinks.fetch12recipes().then((results) => fetchRecipes(results));
@@ -86,7 +86,7 @@ export default function Drinks() {
       <div>
         { !!recipe && recipeFilterLimit(recipe).map((recipeF, index) => (
           <Recipes
-            key={ recipeF.idDrink }
+            key={ index }
             recipeF={ recipeF }
             index={ index }
           />

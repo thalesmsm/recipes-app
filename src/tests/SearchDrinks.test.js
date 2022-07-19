@@ -13,21 +13,13 @@ describe('Testando o componente SearchBar', () => {
         }));
     })
     test('Verifique se ao pesquisar por ingrediente as receitas são renderizadas', async () => {
-        renderWithRouter(<App />)
-        const inputEmail = screen.getByRole('textbox');
-        const inputPassword = screen.getByPlaceholderText(/senha/i);
-        const buttonLogin = screen.getByRole('button', {  name: /entrar/i})
-    
-        userEvent.type(inputEmail, 'teste@teste.com')
-        userEvent.type(inputPassword, '1234567')
-        userEvent.click(buttonLogin)
-
-        const imgDrink = screen.getByTestId('drinks-bottom-btn')
-        userEvent.click(imgDrink)
+        const { history } = renderWithRouter(<App />)
+        history.push('/drinks')
+        expect(history.location.pathname).toBe('/drinks')
 
         const imgSearch = screen.getByTestId('search-top-btn')
         userEvent.click(imgSearch)
-        
+
         const inputSearch = screen.getByTestId('search-input')
         expect(inputSearch).toBeInTheDocument
 
@@ -45,20 +37,12 @@ describe('Testando o componente SearchBar', () => {
 
     test('Verifique se ao pesquisar por ingrediente as receitas são renderizadas', async () => {
         const { history } = renderWithRouter(<App />)
-        const inputEmail = screen.getByRole('textbox');
-        const inputPassword = screen.getByPlaceholderText(/senha/i);
-        const buttonLogin = screen.getByRole('button', {  name: /entrar/i})
-    
-        userEvent.type(inputEmail, 'teste@teste.com')
-        userEvent.type(inputPassword, '1234567')
-        userEvent.click(buttonLogin)
-
-        const imgDrink = screen.getByTestId('drinks-bottom-btn')
-        userEvent.click(imgDrink)
+        history.push('/drinks')
+        expect(history.location.pathname).toBe('/drinks')
 
         const imgSearch = screen.getByTestId('search-top-btn')
         userEvent.click(imgSearch)
-        
+
         const inputSearch = screen.getByTestId('search-input')
         expect(inputSearch).toBeInTheDocument
 
@@ -72,25 +56,19 @@ describe('Testando o componente SearchBar', () => {
 
         history.push('/foods/178318')
         expect(history.location.pathname).toBe('/foods/178318');
-
     })
 
     test('Verifique se ao pesquisar por ingrediente as receitas são renderizadas', async () => {
         const { history } = renderWithRouter(<App />)
-        const inputEmail = screen.getByRole('textbox');
-        const inputPassword = screen.getByPlaceholderText(/senha/i);
-        const buttonLogin = screen.getByRole('button', {  name: /entrar/i})
-    
-        userEvent.type(inputEmail, 'teste@teste.com')
-        userEvent.type(inputPassword, '1234567')
-        userEvent.click(buttonLogin)
-
+        history.push('/drinks')
+        expect(history.location.pathname).toBe('/drinks')
+  
         const imgDrink = screen.getByTestId('drinks-bottom-btn')
         userEvent.click(imgDrink)
 
         const imgSearch = screen.getByTestId('search-top-btn')
         userEvent.click(imgSearch)
-        
+
         const inputSearch = screen.getByTestId('search-input')
         expect(inputSearch).toBeInTheDocument
 
@@ -101,27 +79,22 @@ describe('Testando o componente SearchBar', () => {
 
         const buttonSearch = (await screen.findByRole('button', {  name: /search/i}))
         userEvent.click(buttonSearch)
-        
+
         const drinkCaipirinha = (await screen.findByRole('heading', {  name: /caipirinha/i}))
         expect(drinkCaipirinha).toBeInTheDocument()
     })
 
     test('Verifique se ao pesquisar por ingrediente as receitas são renderizadas', async () => {
         const { history } = renderWithRouter(<App />)
-        const inputEmail = screen.getByRole('textbox');
-        const inputPassword = screen.getByPlaceholderText(/senha/i);
-        const buttonLogin = screen.getByRole('button', {  name: /entrar/i})
-    
-        userEvent.type(inputEmail, 'teste@teste.com')
-        userEvent.type(inputPassword, '1234567')
-        userEvent.click(buttonLogin)
+        history.push('/drinks')
+        expect(history.location.pathname).toBe('/drinks')
 
         const imgDrink = screen.getByTestId('drinks-bottom-btn')
         userEvent.click(imgDrink)
 
         const imgSearch = screen.getByTestId('search-top-btn')
         userEvent.click(imgSearch)
-        
+
         const inputSearch = screen.getByTestId('search-input')
         expect(inputSearch).toBeInTheDocument
 
@@ -134,8 +107,8 @@ describe('Testando o componente SearchBar', () => {
         const windowAlert = jest.spyOn(window, 'alert');
         userEvent.click(buttonSearch)
 
-        
+
         expect(windowAlert).toHaveBeenCalledTimes(1)
     })
 
-})
+}) 
