@@ -19,9 +19,9 @@ export default function Foods() {
     }
     if (!recipe) {
       global.alert(`${''}Sorry, we haven't found any recipes for these filters.`);
-      fetchRecipes([]);
+      FetchFoods.fetch12recipes().then((results) => fetchRecipes(results));
     }
-  }, [recipe]);
+  }, [recipe, history]);
 
   useEffect(() => {
     FetchFoods.fetch12recipes().then((results) => fetchRecipes(results));
@@ -84,7 +84,7 @@ export default function Foods() {
       <div>
         { !!recipe && recipeFilterLimit(recipe).map((recipeF, index) => (
           <Recipes
-            key={ recipeF.idMeal }
+            key={ index }
             recipeF={ recipeF }
             index={ index }
           />

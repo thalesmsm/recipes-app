@@ -5,7 +5,6 @@ export default function DrinksDetails() {
   const { recipe } = useContext(RecipesContext);
 
   useEffect(() => {
-    console.log(recipe);
   }, [recipe]);
 
   return (
