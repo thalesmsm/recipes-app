@@ -54,11 +54,11 @@ describe('Testando o componente SearchBar', () => {
         const buttonSearch = (await screen.findByRole('button', {  name: /search/i}))
         userEvent.click(buttonSearch)
 
-        history.push('/foods/178318')
-        expect(history.location.pathname).toBe('/foods/178318');
+        history.push('/drinks/178318')
+        expect(history.location.pathname).toBe('/drinks/178318');
     })
 
-    test('Verifique se ao pesquisar por ingrediente as receitas são renderizadas', async () => {
+    test('Verifique se ao pesquisar por letra a receita é renderizadas', async () => {
         const { history } = renderWithRouter(<App />)
         history.push('/drinks')
         expect(history.location.pathname).toBe('/drinks')

@@ -69,7 +69,7 @@ describe('Testando o componente SearchBar', () => {
 
     })
 
-    test('Verifique se ao pesquisar por ingrediente as receitas são renderizadas', async () => {
+    test('Verifique se ao pesquisar por letra as receitas são renderizadas', async () => {
         const { history } = renderWithRouter(<App />)
         const inputEmail = screen.getByRole('textbox');
         const inputPassword = screen.getByPlaceholderText(/senha/i);
