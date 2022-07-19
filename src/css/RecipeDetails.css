@@ -7,3 +7,14 @@
   margin: 10px;
   width: 170px;
 }
+
+.start-recipe-btn {
+  background-color: #502314;
+  border-radius: 4px;
+  bottom: 0;
+  color: #ff8233;
+  margin-left: 19px;
+  padding: 8px 18px;
+  position: fixed;
+  width: 90%;
+}
