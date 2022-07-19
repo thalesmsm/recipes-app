@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RecipeDetails from '../components/RecipeDetails';
 import FetchFoods from '../services/FetchFoods';
+import '../css/RecipeDetails.css';
 
 export default function DrinksDetails() {
   const [food, setFood] = useState([]);
@@ -18,16 +19,18 @@ export default function DrinksDetails() {
   return (
     <div>
       <RecipeDetails />
-      { !!food
+      <div className="recomendation-container">
+        { !!food
       && food.slice(0, six).map((r, i) => (
         <div
           data-testid={ `${i}-recomendation-card` }
           key={ i }
         >
           <img src={ r.strMealThumb } alt="recomendacoes" />
-          <p>{ r.strMeal }</p>
+          <p data-testid={ `${i}-recomendation-title` }>{ r.strMeal }</p>
         </div>
       ))}
+      </div>
     </div>
 
   );
