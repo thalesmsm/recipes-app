@@ -1,9 +1,9 @@
 .recomendation-container {
-    display: flex;
-    overflow-x: scroll;    
+  display: flex;
+  overflow-x: scroll;
 }
 
 .recomendation-container img {
-    width: 170px;
-    margin: 10px
+  margin: 10px;
+  width: 170px;
 }
