@@ -36,20 +36,16 @@ export default function RecipeDetails() {
     }
   }, []);
 
-  const statusBtnRecipe = () => {
+  useEffect(() => {
     const localDoneRecipes = doneRecipesRead();
     // const id = pathname.split('/').at(magic);
     const finishRecipes = localDoneRecipes
-      .some((recipe) => recipe.id === Number(recipeInfos.idDrink ?? recipeInfos.idMeal));
+      .some((recipe) => recipe.id === id);
 
     if (finishRecipes) {
       setIsDone(true);
     }
-  };
-
-  useEffect(() => {
-    statusBtnRecipe();
-  }, []);
+  }, [id]);
 
   const handleClickStart = async () => {
     if (pathnameFoods) {

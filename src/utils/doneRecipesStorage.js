@@ -1,16 +1,6 @@
 export function doneRecipesRead() {
   if (!localStorage.getItem('doneRecipes')) {
-    return [{
-      id: 0,
-      type: '',
-      nationality: '',
-      category: '',
-      alcoholicOrNot: '',
-      name: '',
-      image: '',
-      doneDate: '',
-      tags: '',
-    }];
+    return [{}];
   }
 
   return JSON.parse(localStorage.getItem('doneRecipes'));
