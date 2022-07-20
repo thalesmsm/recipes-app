@@ -27,12 +27,12 @@ export default function RecipeDetails() {
     }
   }, []);
 
-  function youtubeLink(link) {
-    if (!link) return;
-    const baseEmbedURL = 'https://www.youtube.com/embed/';
-    const videoId = link.split('v=')[1];
-    return `${baseEmbedURL}${videoId}`;
-  }
+  // function youtubeLink(link) {
+  //   if (!link) return;
+  //   const baseEmbedURL = 'https://www.youtube.com/embed/';
+  //   const videoId = link.split('v=')[1];
+  //   return `${baseEmbedURL}${videoId}`;
+  // }
 
   return (
     <div>
@@ -75,7 +75,7 @@ export default function RecipeDetails() {
             && <iframe
               title="video"
               width="300"
-              src={ youtubeLink(recipeInfos.strYoutube) }
+              src={ recipeInfos.strYoutube.replace('watch?v=', 'embed/') }
               data-testid="video"
             />}
           </div>

@@ -33,7 +33,16 @@ describe('Testando a página foods', () => {
         await waitFor(() => { 
             history.push('/foods/52796')
             expect(history.location.pathname).toBe('/foods/52796');
+            
         }, 500)
+
+        console.log(history.location.pathname);
+        
+        const nameRecipe = await screen.findByRole('heading', {  name: /brown stew chicken/i})
+        expect(nameRecipe).toBeInTheDocument()
+
+        const video = await screen.findByTitle(/video/i)
+        expect(video).toBeInTheDocument()
 
     })
 
@@ -57,6 +66,6 @@ describe('Testando a página foods', () => {
 
         global.alert = jest.fn()
         
-        waitFor(() => { expect(global.alert).not.toHaveBeenCalledWith(`${''}Sorry, we haven't found any recipes for these filters.`) })
+        waitFor(() => { expect(global.alert).toHaveBeenCalledWith(`${''}Sorry, we haven't found any recipes for these filters.`) })
     })
 })
