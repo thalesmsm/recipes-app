@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import '../css/Login.css';
 
 export default function Login() {
-  const [userEmail, setUserEmail] = useState('');
+  const [email, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const history = useHistory();
 
@@ -22,7 +22,7 @@ export default function Login() {
   // https://pt.stackoverflow.com/questions/1386/express%C3%A3o-regular-para-valida%C3%A7%C3%A3o-de-e-mail
   const validEmail = () => {
     const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
-    return regex.test(userEmail);
+    return regex.test(email);
   };
 
   function validLogin() {
@@ -36,10 +36,7 @@ export default function Login() {
   function handleClickLoginButton() {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
-    const user = {
-      email: userEmail,
-    };
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('user', JSON.stringify({ email }));
     history.push('/foods');
   }
 
