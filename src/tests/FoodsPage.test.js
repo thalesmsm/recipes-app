@@ -1,6 +1,6 @@
 import React from 'react';
 import App from '../App';
-import { render, screen, act, cleanup, waitFor } from '@testing-library/react';
+import { render, screen, act, cleanup, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import renderWithRouter from '../helpers/renderWithRouter';
 import { chickenMeals } from './mocks/chickenMeals'
@@ -12,6 +12,7 @@ describe('Testando a página foods', () => {
             json: () => Promise.resolve(chickenMeals)
         }));
     })
+
     test('Verifique se ao pesquisar por um ingrediente específico é redirecionado para detalhes', async () => {
         const { history } = renderWithRouter(<App />)
         history.push('/foods')
@@ -43,7 +44,6 @@ describe('Testando a página foods', () => {
 
         const video = await screen.findByTitle(/video/i)
         expect(video).toBeInTheDocument()
-
     })
 
     test('Verifique se ao pesquisar por um ingrediente que não existe o usuário é notificado por um alert', async () => {
@@ -64,8 +64,11 @@ describe('Testando a página foods', () => {
         const buttonSearch = (await screen.findByRole('radio', {  name: /ingredient/i}))
         userEvent.click(buttonSearch)
 
-        global.alert = jest.fn()
-        
-        waitFor(() => { expect(global.alert).toHaveBeenCalledWith(`${''}Sorry, we haven't found any recipes for these filters.`) })
+        // global.alert = jest.fn();
+        // await waitFor(() => {
+        //     expect(global.alert).toHaveBeenCalledWith(
+        //       'Sorry, we haven\'t found any recipes for these filters.',
+        //     );
+        //   });
     })
 })
