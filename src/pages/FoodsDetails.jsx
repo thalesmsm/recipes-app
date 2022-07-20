@@ -31,13 +31,6 @@ export default function FoodsDetails() {
         </div>
       ))}
       </div>
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-        className="start-recipe-btn"
-      >
-        Start Recipe
-      </button>
     </div>
 
   );

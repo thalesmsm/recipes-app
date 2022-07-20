@@ -1,38 +1,100 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory, useParams } from 'react-router-dom';
+import clipboardCopy from 'clipboard-copy';
 import FetchDrinks from '../services/FetchDrinks';
 import FetchFoods from '../services/FetchFoods';
+import { doneRecipesRead } from '../utils/doneRecipesStorage';
+import { favoriteRecipesWrite,
+  favoriteRecipesRead, removeFavoriteRecipes } from '../utils/favoritesRecipesStorage';
+import shareIcon from '../images/shareIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 export default function RecipeDetails() {
   const [recipeInfos, setRecipeInfos] = useState([]);
+  const [isDone, setIsDone] = useState(false);
+  const [favorite, setFavorite] = useState(false);
+  const [share, setShare] = useState(false);
   const { pathname } = useLocation();
+  const history = useHistory();
+  const { id } = useParams();
+  const pathnameFoods = history.location.pathname.includes('/foods');
 
   useEffect(() => {
-    const magic = -1;
-    const id = pathname.split('/').at(magic);
     if (pathname === `/drinks/${id}`) {
       const getDrinksDetails = async () => {
-        const one = -1;
-        const drinks = await FetchDrinks.fetchDrinksDetails(pathname.split('/').at(one));
+        const drinks = await FetchDrinks.fetchDrinksDetails(id);
         setRecipeInfos(drinks[0]);
       };
       getDrinksDetails();
     } else {
       const getFoodsDetails = async () => {
-        const one = -1;
-        const foods = await FetchFoods.fetchFoodDetails(pathname.split('/').at(one));
+        const foods = await FetchFoods.fetchFoodDetails(id);
         setRecipeInfos(foods[0]);
       };
       getFoodsDetails();
     }
   }, []);
 
-  // function youtubeLink(link) {
-  //   if (!link) return;
-  //   const baseEmbedURL = 'https://www.youtube.com/embed/';
-  //   const videoId = link.split('v=')[1];
-  //   return `${baseEmbedURL}${videoId}`;
-  // }
+  const statusBtnRecipe = () => {
+    const localDoneRecipes = doneRecipesRead();
+    // const id = pathname.split('/').at(magic);
+    const finishRecipes = localDoneRecipes
+      .some((recipe) => recipe.id === Number(recipeInfos.idDrink ?? recipeInfos.idMeal));
+
+    if (finishRecipes) {
+      setIsDone(true);
+    }
+  };
+
+  useEffect(() => {
+    statusBtnRecipe();
+  }, []);
+
+  const handleClickStart = async () => {
+    if (pathnameFoods) {
+      history.push(`/foods/${id}/in-progress`);
+    } else {
+      history.push(`/drinks/${id}/in-progress`);
+    }
+  };
+
+  const shareButton = () => {
+    if (pathnameFoods) {
+      clipboardCopy(`http://localhost:3000/foods/${id}`);
+    } else {
+      clipboardCopy(`http://localhost:3000/drinks/${id}`);
+    }
+    setShare(true);
+  };
+
+  const setLocalStorageFavs = () => {
+    if (favorite) {
+      removeFavoriteRecipes(id);
+    } else {
+      const recipesFavs = {
+        id: recipeInfos.idMeal ?? recipeInfos.idDrink,
+        type: pathnameFoods ? 'food' : 'drink',
+        nationality: recipeInfos.strArea ?? '',
+        category: recipeInfos.strCategory ?? '',
+        alcoholicOrNot: recipeInfos.strAlcoholic ?? '',
+        name: recipeInfos.strMeal ?? recipeInfos.strDrink,
+        image: recipeInfos.strMealThumb ?? recipeInfos.strDrinkThumb,
+      };
+
+      favoriteRecipesWrite(recipesFavs);
+    }
+    setFavorite(!favorite);
+  };
+
+  useEffect(() => {
+    const favsInStorage = favoriteRecipesRead();
+    const checkHasFavs = favsInStorage
+      .some((favs) => favs.id === id);
+    if (checkHasFavs) {
+      setFavorite(true);
+    }
+  }, [id]);
 
   return (
     <div>
@@ -45,6 +107,24 @@ export default function RecipeDetails() {
               src={ recipeInfos.strMealThumb ?? recipeInfos.strDrinkThumb }
               alt={ recipeInfos.strMealThumb ?? recipeInfos.strDrinkThumb }
             />
+            <button
+              type="button"
+              data-testid="share-btn"
+              onClick={ shareButton }
+            >
+              <img src={ shareIcon } alt="share" />
+            </button>
+            <button
+              type="button"
+              onClick={ setLocalStorageFavs }
+            >
+              <img
+                src={ favorite ? blackHeartIcon : whiteHeartIcon }
+                alt="favorite"
+                data-testid="favorite-btn"
+              />
+            </button>
+            {share && <p>Link copied!</p> }
             <h1
               data-testid="recipe-title"
             >
@@ -80,6 +160,18 @@ export default function RecipeDetails() {
             />}
           </div>
         )}
+      <div>
+        { !isDone
+                  && (
+                    <button
+                      type="button"
+                      data-testid="start-recipe-btn"
+                      className="start-recipe-btn"
+                      onClick={ handleClickStart }
+                    >
+                      Start Recipe
+                    </button>) }
+      </div>
     </div>
   );
 }
