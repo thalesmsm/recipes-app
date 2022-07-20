@@ -5,7 +5,9 @@ import '../css/RecipeDetails.css';
 
 export default function DrinksDetails() {
   const [food, setFood] = useState([]);
+  // const { pathname } = useLocation();
   const six = 6;
+  // const magic = -1;
 
   const getFood = async () => {
     const foods = await FetchFoods.fetch12recipes();
@@ -31,13 +33,6 @@ export default function DrinksDetails() {
         </div>
       ))}
       </div>
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-        className="start-recipe-btn"
-      >
-        Start Recipe
-      </button>
     </div>
 
   );
