@@ -1,6 +1,6 @@
 export function doneRecipesRead() {
   if (!localStorage.getItem('doneRecipes')) {
-    return [{}];
+    localStorage.setItem('doneRecipes', JSON.stringify([]));
   }
 
   return JSON.parse(localStorage.getItem('doneRecipes'));
