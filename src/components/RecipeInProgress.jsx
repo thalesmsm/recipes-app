@@ -4,15 +4,19 @@ import PropTypes from 'prop-types';
 import clipboardCopy from 'clipboard-copy';
 import { favoriteRecipesWrite,
   favoriteRecipesRead, removeFavoriteRecipes } from '../utils/favoritesRecipesStorage';
+import { inProgressRecipesRead,
+  inProgressRecipesWrite } from '../utils/inProgressRecipes';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../css/RecipesInProgress.css';
+import { doneRecipesWrite } from '../utils/doneRecipesStorage';
 
 export default function RecipeInProgress({ recipeProgress }) {
   const [favorite, setFavorite] = useState(false);
   const [share, setShare] = useState(false);
   const [isChecked, setIsChecked] = useState({});
+  const [isDisabled, setIsDisabled] = useState(false);
   const history = useHistory();
   const { id } = useParams();
   const pathnameFoods = history.location.pathname.includes('/foods');
@@ -52,7 +56,67 @@ export default function RecipeInProgress({ recipeProgress }) {
     if (checkHasFavs) {
       setFavorite(true);
     }
+
+    const checkedStorage = () => {
+      if (pathnameFoods) {
+        const response = inProgressRecipesRead('meals', id) ?? [];
+        response.forEach((r) => setIsChecked((pState) => ({ ...pState, [r]: true })));
+      } else {
+        const response = inProgressRecipesRead('cocktails', id) ?? [];
+        response.forEach((r) => setIsChecked((pState) => ({ ...pState, [r]: true })));
+      }
+    };
+
+    checkedStorage();
+
+    return () => {
+      setIsChecked({});
+    };
   }, [id]);
+
+  const ingredients = Object.keys(recipeProgress)
+    .filter((i) => i.includes('strIngredient'))
+    .filter((ing) => recipeProgress[ing] && recipeProgress[ing].length > 1);
+
+  const handleCheckBox = ({ target: { name, checked } }) => {
+    const newChecked = { ...isChecked, [name]: checked };
+    const checkedValues = Object.values(newChecked);
+    if (pathnameFoods) {
+      inProgressRecipesWrite('meals', id, Object.entries(newChecked)
+        .filter((checkRecipe) => checkRecipe[1] === true)
+        .map(([kRecipe]) => kRecipe));
+      setIsChecked(newChecked);
+      setIsDisabled(checkedValues.every((e) => e === true)
+      && (checkedValues.length === ingredients.length));
+    } else {
+      inProgressRecipesWrite('cocktails', id, Object
+        .entries(newChecked)
+        .filter((checkRecipe) => checkRecipe[1] === true)
+        .map(([kRecipe]) => kRecipe));
+      setIsChecked(newChecked);
+      setIsDisabled(checkedValues.every((e) => e === true)
+      && (checkedValues.length === ingredients.length));
+    }
+  };
+
+  const handleButtonFinish = () => {
+    const storageDone = {
+      id: recipeProgress.idMeal ?? recipeProgress.idDrink,
+      type: pathnameFoods ? 'food' : 'drink',
+      nationality: recipeProgress.strArea ?? '',
+      category: recipeProgress.strCategory ?? '',
+      alcoholicOrNot: recipeProgress.strAlcoholic ?? '',
+      name: recipeProgress.strMeal ?? recipeProgress.strDrink,
+      image: recipeProgress.strMealThumb ?? recipeProgress.strDrinkThumb,
+      doneDate: new Date().toLocaleDateString(),
+      tags:
+        recipeProgress.strTags && recipeProgress.strTags.length > 0
+          ? recipeProgress.strTags.split(',')
+          : [],
+    };
+    doneRecipesWrite(storageDone);
+    history.push('/done-recipes');
+  };
 
   return (
     <div>
@@ -95,41 +159,38 @@ export default function RecipeInProgress({ recipeProgress }) {
           { recipeProgress.strInstructions ?? recipeProgress.strInstructions }
         </p>
         { Object.keys(recipeProgress)
-          .filter((i) => i.includes('strIngredient')).map((ing, index) => {
+          .filter((i) => i.includes('strIngredient')).map((ing, i) => {
             if (recipeProgress[ing] && recipeProgress[ing].length > 1) {
               return (
                 <label
-                  key={ index }
-                  htmlFor={ index }
-                  data-testid={ `${index}-ingredient-step` }
-                  className={ isChecked[ing] === true ? 'ingredient-done' : null }
+                  key={ i }
+                  htmlFor={ i + ing }
+                  data-testid={ `${i}-ingredient-step` }
+                  className={ isChecked[i + ing] ? 'ingredient-done' : undefined }
                 >
                   <input
                     type="checkbox"
-                    id={ index }
-                    name={ ing }
-                    onChange={ ({ target: { name, checked } }) => {
-                      setIsChecked({
-                        ...isChecked,
-                        [name]: checked,
-                      });
-                    } }
+                    id={ i + ing }
+                    name={ i + ing }
+                    checked={ isChecked[i + ing] ?? false }
+                    onChange={ handleCheckBox }
                   />
                   { recipeProgress[ing]
                       && `${recipeProgress[ing]} :
-                      ${recipeProgress[`strMeasure${index + 1}`]}` }
+                      ${recipeProgress[`strMeasure${i + 1}`]}` }
                 </label>
               );
             }
             return null;
-          }) }
+          })}
       </div>
       <div>
         <button
           type="button"
           data-testid="finish-recipe-btn"
-          onClick={ () => history.push('/done-recipes') }
+          onClick={ handleButtonFinish }
           className="finish-recipe-btn"
+          disabled={ !isDisabled }
         >
           Finish recipe
         </button>

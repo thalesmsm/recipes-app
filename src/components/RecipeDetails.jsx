@@ -9,12 +9,14 @@ import { favoriteRecipesWrite,
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import { inProgressRecipesKey } from '../utils/inProgressRecipes';
 
 export default function RecipeDetails() {
   const [recipeInfos, setRecipeInfos] = useState([]);
   const [isDone, setIsDone] = useState(false);
   const [favorite, setFavorite] = useState(false);
   const [share, setShare] = useState(false);
+  const [isStart, setIsStart] = useState(false);
   const { pathname } = useLocation();
   const history = useHistory();
   const { id } = useParams();
@@ -53,6 +55,7 @@ export default function RecipeDetails() {
     } else {
       history.push(`/drinks/${id}/in-progress`);
     }
+    setIsStart(true);
   };
 
   const shareButton = () => {
@@ -89,6 +92,21 @@ export default function RecipeDetails() {
       .some((favs) => favs.id === id);
     if (checkHasFavs) {
       setFavorite(true);
+    }
+
+    const progressStorage = inProgressRecipesKey();
+    if (pathnameFoods) {
+      const iMeals = Object.keys(progressStorage.meals);
+      const checkIMeals = iMeals.some((mealid) => mealid === id);
+      if (checkIMeals) {
+        setIsStart(true);
+      }
+    } else {
+      const iCocktails = Object.keys(progressStorage.cocktails);
+      const checkICocktails = iCocktails.some((cocktailsid) => cocktailsid === id);
+      if (checkICocktails) {
+        setIsStart(true);
+      }
     }
   }, [id]);
 
@@ -165,7 +183,7 @@ export default function RecipeDetails() {
               className="start-recipe-btn"
               onClick={ handleClickStart }
             >
-              Start Recipe
+              { isStart ? 'Continue Recipe' : 'Start Recipe' }
             </button>) }
       </div>
     </div>
