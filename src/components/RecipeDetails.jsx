@@ -158,15 +158,15 @@ export default function RecipeDetails() {
         )}
       <div>
         { !isDone
-                  && (
-                    <button
-                      type="button"
-                      data-testid="start-recipe-btn"
-                      className="start-recipe-btn"
-                      onClick={ handleClickStart }
-                    >
-                      Start Recipe
-                    </button>) }
+          && (
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              className="start-recipe-btn"
+              onClick={ handleClickStart }
+            >
+              Start Recipe
+            </button>) }
       </div>
     </div>
   );
