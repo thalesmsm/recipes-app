@@ -1,3 +1,23 @@
-.ingredient-done:checked + label {
+.ingredient-done {
   text-decoration: line-through;
+}
+
+.inprogress-container {
+  padding-bottom: 40px;
+}
+
+.finish-recipe-btn {
+  background-color: #502314;
+  border-radius: 4px;
+  bottom: 0;
+  color: #ff8233;
+  margin-left: 18px;
+  padding: 8px 18px;
+  position: fixed;
+  width: 90%;
+}
+
+.finish-recipe-btn-done {
+  color: transparent;
+  width: 0;
 }
