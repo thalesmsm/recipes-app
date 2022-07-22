@@ -120,58 +120,82 @@ export default function RecipeDetails() {
               data-testid="recipe-photo"
               src={ recipeInfos.strMealThumb ?? recipeInfos.strDrinkThumb }
               alt={ recipeInfos.strMealThumb ?? recipeInfos.strDrinkThumb }
+              className="details-thumb"
             />
-            <button
-              type="button"
-              data-testid="share-btn"
-              onClick={ shareButton }
-            >
-              <img src={ shareIcon } alt="share" />
-            </button>
-            <button
-              type="button"
-              onClick={ setLocalStorageFavs }
-            >
-              <img
-                src={ favorite ? blackHeartIcon : whiteHeartIcon }
-                alt="favorite"
-                data-testid="favorite-btn"
-              />
-            </button>
-            {share && <p>Link copied!</p> }
-            <h1
-              data-testid="recipe-title"
-            >
-              { recipeInfos.strDrink ?? recipeInfos.strMeal }
-            </h1>
-            <p data-testid="recipe-category">
-              { recipeInfos.strCategory }
-              { recipeInfos.strAlcoholic }
-            </p>
-            <p
-              data-testid="instructions"
-            >
-              { recipeInfos.strInstructions ?? recipeInfos.strInstructions }
-
-            </p>
-            { Object.keys(recipeInfos)
-              .filter((i) => i.includes('strIngredient')).map((ing, index) => (
-                <div key={ index }>
-                  <p
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    { recipeInfos[ing]
-                    && `${recipeInfos[ing]} : ${recipeInfos[`strMeasure${index + 1}`]}` }
-                  </p>
-                </div>
-              )) }
+            <div className="title-container">
+              <div className="details-title">
+                <h1
+                  data-testid="recipe-title"
+                >
+                  { recipeInfos.strDrink ?? recipeInfos.strMeal }
+                </h1>
+                <p data-testid="recipe-category">
+                  { recipeInfos.strCategory }
+                  { recipeInfos.strAlcoholic }
+                </p>
+              </div>
+              <div className="buttons-details">
+                <button
+                  type="button"
+                  data-testid="share-btn"
+                  onClick={ shareButton }
+                >
+                  <img src={ shareIcon } alt="share" />
+                </button>
+                {share && <p>Link copied!</p> }
+                <button
+                  type="button"
+                  onClick={ setLocalStorageFavs }
+                >
+                  <img
+                    src={ favorite ? blackHeartIcon : whiteHeartIcon }
+                    alt="favorite"
+                    data-testid="favorite-btn"
+                  />
+                </button>
+              </div>
+            </div>
+            <div className="text-details">
+              <div className="ingredients">
+                <h3>Ingredients</h3>
+                <ul>
+                  { Object.keys(recipeInfos)
+                    .filter((i) => i.includes('strIngredient')).map((ing, index) => {
+                      if (recipeInfos[ing] && recipeInfos[ing].length > 1) {
+                        return (
+                          <li
+                            key={ index }
+                            data-testid={ `${index}-ingredient-name-and-measure` }
+                          >
+                            { recipeInfos[ing]
+                        && `${recipeInfos[ing]} 
+                        :${recipeInfos[`strMeasure${index + 1}`]}`}
+                          </li>
+                        );
+                      } return null;
+                    }) }
+                </ul>
+              </div>
+              <div className="instructions">
+                <h3>Instructions</h3>
+                <p
+                  data-testid="instructions"
+                >
+                  { recipeInfos.strInstructions ?? recipeInfos.strInstructions }
+                </p>
+              </div>
+            </div>
             { recipeInfos.strYoutube
-            && <iframe
-              title="video"
-              width="300"
-              src={ recipeInfos.strYoutube.replace('watch?v=', 'embed/') }
-              data-testid="video"
-            />}
+            && (
+              <div className="video">
+                <iframe
+                  title="video"
+                  width="340"
+                  src={ recipeInfos.strYoutube.replace('watch?v=', 'embed/') }
+                  data-testid="video"
+                />
+              </div>
+            )}
           </div>
         )}
       <div>

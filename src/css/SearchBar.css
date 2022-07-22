@@ -2,8 +2,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: 62px 0 -52px;
-  position: relative;
+  margin: 8px 0 4px;
   z-index: 1;
 }
 
@@ -23,7 +22,7 @@
   width: 90%;
 }
 
-/* .label-container {
+.label-container {
   cursor: pointer;
   display: block;
   font-size: 1rem;
@@ -35,13 +34,13 @@
 
 .label-container .input-radio {
   cursor: pointer;
-  height: 0;
+  height: 1px;
   opacity: 0;
   position: absolute;
-  width: 0;
-}  */
+  width: 1px;
+}
 
-/* .checkmark {
+.checkmark {
   background-color: rgb(204, 204, 204);
   border-radius: 50%;
   height: 1.2rem;
@@ -76,7 +75,7 @@
 
 .label-container .input-radio:checked ~ .checkmark:after {
   display: block;
-} */
+}
 
 .search-btn {
   background-color: #502314;

@@ -5,6 +5,7 @@ import { RecipesContext } from '../context/RecipesContext';
 import Footer from '../components/Footer';
 import Recipes from '../components/Recipes';
 import FetchDrinks from '../services/FetchDrinks';
+import '../css/CategoryButtons.css';
 
 export default function Drinks() {
   const { recipe, fetchRecipes,
@@ -66,23 +67,26 @@ export default function Drinks() {
       <div>
         <Header title="Drinks" hasSearch />
       </div>
-      <button
-        type="button"
-        onClick={ buttonAll }
-        data-testid="All-category-filter"
-      >
-        All
-      </button>
-      { categoryName.map(({ strCategory }) => (
+      <div className="category-buttons">
         <button
           type="button"
-          onClick={ getDrinksByCategories }
-          value={ strCategory }
-          key={ strCategory }
-          data-testid={ `${strCategory}-category-filter` }
+          onClick={ buttonAll }
+          data-testid="All-category-filter"
         >
-          { strCategory }
-        </button>)) }
+          All
+        </button>
+        { categoryName.map(({ strCategory }) => (
+          <button
+            type="button"
+            value={ strCategory }
+            onClick={ getDrinksByCategories }
+            key={ strCategory }
+            data-testid={ `${strCategory}-category-filter` }
+          >
+            { strCategory }
+          </button>
+        )) }
+      </div>
       <div>
         { !!recipe && recipeFilterLimit(recipe).map((recipeF, index) => (
           <Recipes

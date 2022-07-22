@@ -1,0 +1,48 @@
+.container {
+  margin-top: 48px;
+  padding-bottom: 8px;
+}
+
+.done-container {
+  border-radius: 4px;
+  box-shadow: 2px 2px 6px black;
+  display: flex;
+  margin: 10px 10px 0;
+  padding: 5px;
+}
+
+.done-container a {
+  color: #502314;
+  height: 120px;
+  text-decoration: none;
+}
+
+.done-container h3 {
+  color: #666;
+}
+
+.done-container img {
+  border-radius: 4px;
+}
+
+.done-img {
+  width: 120px;
+}
+
+.done-infos {
+  margin-left: 12px;
+}
+
+.share-container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 195px;
+}
+
+.share-container p {
+  font-size: 10px;
+  position: relative;
+  right: 25px;
+  top: 30px;
+}

@@ -2,8 +2,79 @@
   text-decoration: line-through;
 }
 
+.ingredient-done input:checked ~ .checkmark:after {
+  display: block;
+}
+
 .inprogress-container {
   padding-bottom: 40px;
+}
+
+.details-thumb {
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.555);
+  width: 22.5rem;
+}
+
+.title-container {
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+}
+
+.details-title {
+  margin: 10px;
+}
+
+.details-title h1 {
+  font-size: 2rem;
+  margin: 0 10px;
+}
+
+.details-title p {
+  color: #666;
+  margin: 0 10px;
+}
+
+.buttons-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 110px;
+}
+
+.buttons-details:nth-child( 1 ) {
+  margin-bottom: 49px;
+}
+
+.buttons-details p {
+  font-size: 10px;
+  margin: 2px 38px 4px;
+  text-align: center;
+  width: 55px;
+}
+
+.text-details {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px;
+}
+
+.text-details h3 {
+  margin-bottom: 4px;
+}
+
+.text-details li {
+  margin-left: 20px;
+}
+
+.instructions-in-progress {
+  padding-bottom: 50px;
+  text-align: justify;
+}
+
+.ingredients {
+  border-bottom: 1px solid #ccc;
 }
 
 .finish-recipe-btn {
@@ -17,7 +88,13 @@
   width: 90%;
 }
 
-.finish-recipe-btn-done {
-  color: transparent;
-  width: 0;
+.finish-recipe-btn:disabled {
+  background-color: #502314bb;
+  border-radius: 4px;
+  bottom: 0;
+  color: #ff8133c5;
+  margin-left: 18px;
+  padding: 8px 18px;
+  position: fixed;
+  width: 90%;
 }

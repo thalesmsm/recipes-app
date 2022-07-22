@@ -9,7 +9,7 @@ export default function Recipes({ recipeF, index }) {
     : `/drinks/${recipeF.idDrink}`;
 
   return (
-    <Link to={ cardRedirect }>
+    <Link to={ cardRedirect } className="links">
       <div
         className="card"
         data-testid={ `${index}-recipe-card` }

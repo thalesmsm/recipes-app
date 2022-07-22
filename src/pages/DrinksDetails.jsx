@@ -21,12 +21,14 @@ export default function DrinksDetails() {
   return (
     <div>
       <RecipeDetails />
+      <h3 className="recommended">Recommended</h3>
       <div className="recomendation-container">
         { !!food
       && food.slice(0, six).map((r, i) => (
         <div
           data-testid={ `${i}-recomendation-card` }
           key={ i }
+          className="recomendation-card "
         >
           <img src={ r.strMealThumb } alt="recomendacoes" />
           <p data-testid={ `${i}-recomendation-title` }>{ r.strMeal }</p>
