@@ -74,24 +74,17 @@ function DoneRecipes() {
               />
             </Link>
             <div className="done-infos">
-              <Link
-                to={ card.type === 'food'
-                  ? `foods/${card.id}` : `drinks/${card.id}` }
-              >
-                <h2
-                  data-testid={ `${index}-horizontal-name` }
+              <div className="share">
+                <Link
+                  to={ card.type === 'food'
+                    ? `foods/${card.id}` : `drinks/${card.id}` }
                 >
-                  {card.name}
-                </h2>
-              </Link>
-              <div className="share-container">
-                <h3
-                  data-testid={ `${index}-horizontal-top-text` }
-                >
-                  { card.type === 'food'
-                    ? `${card.nationality} - ${card.category}`
-                    : card.alcoholicOrNot}
-                </h3>
+                  <h2
+                    data-testid={ `${index}-horizontal-name` }
+                  >
+                    {card.name}
+                  </h2>
+                </Link>
                 <button
                   type="button"
                   onClick={ () => shareButton(card.id, card.type) }
@@ -103,6 +96,15 @@ function DoneRecipes() {
                   />
                 </button>
                 { copied.includes(card.id) && <p>Link copied!</p> }
+              </div>
+              <div className="share-container">
+                <h3
+                  data-testid={ `${index}-horizontal-top-text` }
+                >
+                  { card.type === 'food'
+                    ? `${card.nationality} - ${card.category}`
+                    : card.alcoholicOrNot}
+                </h3>
               </div>
               <h4
                 data-testid={ `${index}-horizontal-done-date` }
