@@ -1,0 +1,18 @@
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 7px 7px -26px;
+  position: relative;
+}
+
+.category-buttons button {
+  background-color: #502314;
+  border-radius: 4px;
+  color: #ff8233;
+  cursor: pointer;
+  flex: 1;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  margin: 4px;
+  padding: 8px 18px;
+}

@@ -44,24 +44,26 @@ export default function Login() {
     <div className="form-container">
       <form>
         <h1>RECIPES</h1>
-        <input
-          data-testid="email-input"
-          id="email"
-          name="email"
-          type="email"
-          placeholder="Email"
-          className="input-login"
-          onChange={ handleChangeEmail }
-        />
-        <input
-          data-testid="password-input"
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Senha"
-          className="input-login"
-          onChange={ handleChangePassword }
-        />
+        <div className="inputs-container">
+          <input
+            data-testid="email-input"
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Email"
+            className="input-login"
+            onChange={ handleChangeEmail }
+          />
+          <input
+            data-testid="password-input"
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Senha"
+            className="input-login"
+            onChange={ handleChangePassword }
+          />
+        </div>
         <button
           type="submit"
           name="submitButton"

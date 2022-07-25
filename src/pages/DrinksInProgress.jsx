@@ -17,7 +17,7 @@ export default function DrinksInProgress() {
 
   return (
     <div>
-      <h1>Drinks in Progress</h1>
+      {/* <h1>Drinks in Progress</h1> */}
       <RecipeInProgress recipeProgress={ drinkInProgress } />
     </div>
   );

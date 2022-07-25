@@ -14,7 +14,7 @@ import { doneRecipesWrite } from '../utils/doneRecipesStorage';
 
 export default function RecipeInProgress({ recipeProgress }) {
   const [favorite, setFavorite] = useState(false);
-  const [share, setShare] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
   const [isChecked, setIsChecked] = useState({});
   const [isDisabled, setIsDisabled] = useState(false);
   const history = useHistory();
@@ -22,12 +22,18 @@ export default function RecipeInProgress({ recipeProgress }) {
   const pathnameFoods = history.location.pathname.includes('/foods');
 
   const shareButton = () => {
+    const time = 2000;
+    setLinkCopied(true);
+
     if (pathnameFoods) {
       clipboardCopy(`http://localhost:3000/foods/${id}`);
     } else {
       clipboardCopy(`http://localhost:3000/drinks/${id}`);
     }
-    setShare(true);
+
+    setTimeout(() => {
+      setLinkCopied(false);
+    }, time);
   };
 
   const setLocalStorageFavs = () => {
@@ -120,70 +126,86 @@ export default function RecipeInProgress({ recipeProgress }) {
 
   return (
     <div>
-      <div className="inprogress-container">
-        <img
-          data-testid="recipe-photo"
-          src={ recipeProgress.strMealThumb ?? recipeProgress.strDrinkThumb }
-          alt="receita"
-        />
-        <button
-          type="button"
-          data-testid="share-btn"
-          onClick={ shareButton }
-        >
-          <img src={ shareIcon } alt="share" />
-        </button>
-        <button
-          type="button"
-          onClick={ setLocalStorageFavs }
-        >
-          <img
-            src={ favorite ? blackHeartIcon : whiteHeartIcon }
-            alt="favorite"
-            data-testid="favorite-btn"
-          />
-        </button>
-        {share && <p>Link copied!</p> }
-        <h1
-          data-testid="recipe-title"
-        >
-          { recipeProgress.strDrink ?? recipeProgress.strMeal }
-        </h1>
-        <p data-testid="recipe-category">
-          { recipeProgress.strCategory }
-          { recipeProgress.strAlcoholic }
-        </p>
-        <p
-          data-testid="instructions"
-        >
-          { recipeProgress.strInstructions ?? recipeProgress.strInstructions }
-        </p>
-        { Object.keys(recipeProgress)
-          .filter((i) => i.includes('strIngredient')).map((ing, i) => {
-            if (recipeProgress[ing] && recipeProgress[ing].length > 1) {
-              return (
-                <label
-                  key={ i }
-                  htmlFor={ i + ing }
-                  data-testid={ `${i}-ingredient-step` }
-                  className={ isChecked[i + ing] ? 'ingredient-done' : undefined }
-                >
-                  <input
-                    type="checkbox"
-                    id={ i + ing }
-                    name={ i + ing }
-                    checked={ isChecked[i + ing] ?? false }
-                    onChange={ handleCheckBox }
-                  />
-                  { recipeProgress[ing]
-                      && `${recipeProgress[ing]} :
-                      ${recipeProgress[`strMeasure${i + 1}`]}` }
-                </label>
-              );
-            }
-            return null;
-          })}
+      <img
+        data-testid="recipe-photo"
+        src={ recipeProgress.strMealThumb ?? recipeProgress.strDrinkThumb }
+        alt="receita"
+        className="details-thumb"
+      />
+      <div className="title-container">
+        <div className="details-title">
+          <h1
+            data-testid="recipe-title"
+          >
+            { recipeProgress.strDrink ?? recipeProgress.strMeal }
+          </h1>
+          <p data-testid="recipe-category">
+            { recipeProgress.strCategory }
+            { recipeProgress.strAlcoholic }
+          </p>
+        </div>
+        <div className="buttons-details">
+          <button
+            type="button"
+            data-testid="share-btn"
+            onClick={ shareButton }
+          >
+            <img src={ shareIcon } alt="share" />
+          </button>
+          {linkCopied && <p className="slide">Link copied!</p> }
+          <button
+            type="button"
+            onClick={ setLocalStorageFavs }
+          >
+            <img
+              src={ favorite ? blackHeartIcon : whiteHeartIcon }
+              alt="favorite"
+              data-testid="favorite-btn"
+            />
+          </button>
+        </div>
       </div>
+      <div className="text-details">
+        <div className="ingredients">
+          <h3>Ingredients</h3>
+          { Object.keys(recipeProgress)
+            .filter((i) => i.includes('strIngredient')).map((ing, i) => {
+              if (recipeProgress[ing] && recipeProgress[ing].length > 1) {
+                return (
+                  <div>
+                    <label
+                      key={ i }
+                      htmlFor={ i + ing }
+                      data-testid={ `${i}-ingredient-step` }
+                      className={ isChecked[i + ing] ? 'ingredient-done' : undefined }
+                    >
+                      <input
+                        type="checkbox"
+                        id={ i + ing }
+                        name={ i + ing }
+                        checked={ isChecked[i + ing] ?? false }
+                        onChange={ handleCheckBox }
+                      />
+                      { recipeProgress[ing]
+                        && `${recipeProgress[ing]} :
+                        ${recipeProgress[`strMeasure${i + 1}`]}` }
+                    </label>
+                  </div>
+                );
+              }
+              return null;
+            })}
+        </div>
+        <div className="instructions-in-progress">
+          <h3>Instructions</h3>
+          <p
+            data-testid="instructions"
+          >
+            { recipeProgress.strInstructions ?? recipeProgress.strInstructions }
+          </p>
+        </div>
+      </div>
+
       <div>
         <button
           type="button"

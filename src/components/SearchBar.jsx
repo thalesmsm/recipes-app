@@ -101,6 +101,7 @@ export default function SearchBar() {
             className="input-radio"
             onChange={ handleByOptionInput }
           />
+          <span className="checkmark" />
         </label>
         <label htmlFor="name" className="label-container">
           Name
@@ -113,6 +114,7 @@ export default function SearchBar() {
             className="input-radio"
             onChange={ handleByOptionInput }
           />
+          <span className="checkmark" />
         </label>
         <label htmlFor="firstletter" className="label-container">
           First Letter

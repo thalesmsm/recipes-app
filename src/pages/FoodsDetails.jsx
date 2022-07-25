@@ -25,6 +25,7 @@ export default function FoodsDetails() {
         <div
           data-testid={ `${i}-recomendation-card` }
           key={ i }
+          className="recomendation-card"
         >
           <img src={ r.strDrinkThumb } alt="recomendacoes" />
           <p data-testid={ `${i}-recomendation-title` }>{ r.strDrink }</p>
