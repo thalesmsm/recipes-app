@@ -11,7 +11,7 @@ import '../css/MiniCards.css';
 
 export default function FavoriteRecipe() {
   const done = favoriteRecipesRead();
-  const [copied, setCopied] = useState([]);
+  const [linkCopied, setLinkCopied] = useState(false);
   const [filtered, setFiltered] = useState('all');
 
   const handleClick = (event) => {
@@ -35,12 +35,18 @@ export default function FavoriteRecipe() {
   };
 
   const shareButton = (id, type) => {
+    const time = 2000;
+    setLinkCopied(true);
+
     if (type === 'food') {
       clipboardCopy(`http://localhost:3000/foods/${id}`);
     } else {
       clipboardCopy(`http://localhost:3000/drinks/${id}`);
     }
-    setCopied((prev) => [...prev, id]);
+
+    setTimeout(() => {
+      setLinkCopied(false);
+    }, time);
   };
   return (
     <div>
@@ -125,7 +131,7 @@ export default function FavoriteRecipe() {
                   />
                 </button>
               </div>
-              { copied.includes(card.id) && <p>Link copied!</p> }
+              { linkCopied && <p className="slide-bottom">Link copied!</p> }
 
             </div>
           </div>
