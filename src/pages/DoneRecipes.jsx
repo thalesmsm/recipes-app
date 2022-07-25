@@ -9,8 +9,8 @@ import '../css/MiniCards.css';
 
 function DoneRecipes() {
   const done = doneRecipesRead();
-  const [copied, setCopied] = useState([]);
   const [filtered, setFiltered] = useState('all');
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const handleClick = (event) => {
     const { target } = event;
@@ -24,12 +24,18 @@ function DoneRecipes() {
   };
 
   const shareButton = (id, type) => {
+    const time = 2000;
+    setLinkCopied(true);
+
     if (type === 'food') {
       clipboardCopy(`http://localhost:3000/foods/${id}`);
     } else {
       clipboardCopy(`http://localhost:3000/drinks/${id}`);
     }
-    setCopied((prev) => [...prev, id]);
+
+    setTimeout(() => {
+      setLinkCopied(false);
+    }, time);
   };
   return (
     <div>
@@ -95,7 +101,7 @@ function DoneRecipes() {
                     alt="share"
                   />
                 </button>
-                { copied.includes(card.id) && <p>Link copied!</p> }
+                { linkCopied && <p className="slide-bottom ">Link copied!</p> }
               </div>
               <div className="share-container">
                 <h3
