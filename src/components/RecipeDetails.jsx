@@ -15,7 +15,7 @@ export default function RecipeDetails() {
   const [recipeInfos, setRecipeInfos] = useState([]);
   const [isDone, setIsDone] = useState(false);
   const [favorite, setFavorite] = useState(false);
-  const [share, setShare] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
   const [isStart, setIsStart] = useState(false);
   const { pathname } = useLocation();
   const history = useHistory();
@@ -59,12 +59,18 @@ export default function RecipeDetails() {
   };
 
   const shareButton = () => {
+    const time = 2000;
+    setLinkCopied(true);
+
     if (pathnameFoods) {
       clipboardCopy(`http://localhost:3000/foods/${id}`);
     } else {
       clipboardCopy(`http://localhost:3000/drinks/${id}`);
     }
-    setShare(true);
+
+    setTimeout(() => {
+      setLinkCopied(false);
+    }, time);
   };
 
   const setLocalStorageFavs = () => {
@@ -142,7 +148,7 @@ export default function RecipeDetails() {
                 >
                   <img src={ shareIcon } alt="share" />
                 </button>
-                {share && <p>Link copied!</p> }
+                {linkCopied && <p className="slide">Link copied!</p> }
                 <button
                   type="button"
                   onClick={ setLocalStorageFavs }
