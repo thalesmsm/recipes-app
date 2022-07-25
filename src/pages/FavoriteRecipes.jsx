@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import clipboardCopy from 'clipboard-copy';
 import { favoriteRecipesRead,
   removeFavoriteRecipes } from '../utils/favoritesRecipesStorage';
@@ -13,6 +13,7 @@ export default function FavoriteRecipe() {
   const done = favoriteRecipesRead();
   const [linkCopied, setLinkCopied] = useState(false);
   const [filtered, setFiltered] = useState('all');
+  const history = useHistory();
 
   const handleClick = (event) => {
     const { target } = event;
@@ -22,6 +23,7 @@ export default function FavoriteRecipe() {
   const handleClickRmvFav = (id) => {
     removeFavoriteRecipes(id);
     setFiltered('all');
+    history.push('/favorite-recipes');
   };
 
   useEffect(() => {
