@@ -12,28 +12,38 @@ body {
 }
 
 form {
-  background-color: #ff8233;
+  background-color: #E49A53;
+  /* background-image: linear-gradient(to bottom, #E49A53, #A3523D); */
   display: flex;
   flex-direction: column;
   height: 100vh;
   padding: 20px;
+  background-size: cover;
+}
+
+.cook {
+  align-self: center;
+  margin-top: 20px;
+  width: 388px;
 }
 
 .inputs-container {
   display: flex;
   flex-direction: column;
-  height: 280px;
+  height: 190px;
   justify-content: space-evenly;
+  margin: 40px 0;
 }
 
-form h1 {
+/* form h1 {
   color: #502314;
   font-family: Edu VIC WA NT Beginner , cursive;
   font-size: 50px;
   font-weight: 900;
+  letter-spacing: 1px;
   margin-top: 60px;
   text-shadow: 1px 1px 3px black;
-}
+} */
 
 .input-login {
   border: 1px solid #ccc;
@@ -50,10 +60,9 @@ form h1 {
 }
 
 .btn-login {
-  background-color: #502314;
-  border: 2px solid #502314;
+  background-color: #a3523d;
   border-radius: 4px;
-  color: #ffcc25;
+  color: #ffda33;
   font-weight: 700;
   letter-spacing: 0.8px;
   padding: 10px 24px;
@@ -62,14 +71,13 @@ form h1 {
 
 .btn-login:hover {
   background-color: #502314cb;
-  color: #ffcc25cb;
+  color: #ffda33cb;
 }
 
 .disabled {
-  background-color: #db291965;
-  border: 2px solid #db291965;
+  background-color: #a3513db9;
   border-radius: 4px;
-  color: #ffcc25cb;
+  color: #ffda33cb;
   cursor: not-allowed;
   letter-spacing: 0.8px;
   opacity: 0.8;

@@ -19,6 +19,7 @@ export default function FoodsDetails() {
   return (
     <div>
       <RecipeDetails />
+      <h3 className="recommended">Recommended</h3>
       <div className="recomendation-container">
         { !!drink
       && drink.slice(0, six).map((r, i) => (

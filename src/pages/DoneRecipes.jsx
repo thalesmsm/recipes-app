@@ -24,7 +24,7 @@ function DoneRecipes() {
   };
 
   const shareButton = (id, type) => {
-    const time = 2000;
+    const time = 1000;
     setLinkCopied(true);
 
     if (type === 'food') {
@@ -118,13 +118,13 @@ function DoneRecipes() {
                 { ` Done in: ${card.doneDate}` }
               </h4>
               { card.tags.map((tag) => (
-                <div key={ index }>
-                  <h5
-                    data-testid={ `${index}-${tag}-horizontal-tag` }
-                  >
-                    { tag }
-                  </h5>
-                </div>
+
+                <span
+                  key={ index }
+                  data-testid={ `${index}-${tag}-horizontal-tag` }
+                >
+                  {`${tag} `}
+                </span>
               )) }
             </div>
           </div>

@@ -1,6 +1,7 @@
 .footer-container {
   align-items: center;
-  background-color: #ff8233;
+  /* background-image: linear-gradient(to bottom, #E49A53, #A3523D); */
+  background-color: #E49A53;
   bottom: 0;
   display: flex;
   justify-content: space-between;
@@ -8,6 +9,7 @@
   position: fixed;
   text-align: center;
   width: 100%;
+  z-index: 1;
 }
 
 button {

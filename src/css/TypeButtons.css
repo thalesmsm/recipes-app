@@ -1,14 +1,14 @@
 .category-buttons {
   display: flex;
   flex-wrap: wrap;
-  margin: 7px 7px -26px;
+  margin: 7px 7px -40px;
   position: relative;
 }
 
 .category-buttons button {
-  background-color: #502314;
+  background-color: #a3523d;
   border-radius: 4px;
-  color: #ff8233;
+  color: #ffda33;
   cursor: pointer;
   flex: 1;
   font-weight: 700;

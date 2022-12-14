@@ -78,10 +78,10 @@
 }
 
 .finish-recipe-btn {
-  background-color: #502314;
+  background-color: #a3523d;
   border-radius: 4px;
   bottom: 0;
-  color: #ff8233;
+  color: #ffda33;
   margin-left: 18px;
   padding: 8px 18px;
   position: fixed;
@@ -90,10 +90,11 @@
 }
 
 .finish-recipe-btn:disabled {
-  background-color: #502314bb;
+  background-color: #a3523d;
+  filter: blur(1px);
   border-radius: 4px;
   bottom: 0;
-  color: #ff8133c5;
+  color: #ffda33c5;
   margin-left: 18px;
   padding: 8px 18px;
   position: fixed;

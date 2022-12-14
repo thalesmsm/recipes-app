@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import '../css/CategoryButtons.css';
 
 export default function Profile() {
-  const user = localStorage.getItem('user');
+  const user = JSON.parse(localStorage.getItem('user'));
   const history = useHistory();
 
   return (
@@ -13,7 +13,7 @@ export default function Profile() {
       <div>
         <Header title="Profile" />
         <h1 data-testid="profile-email" style={ { textAlign: 'center' } }>
-          {user}
+          {user.email}
         </h1>
         <div className="category-buttons">
           <button

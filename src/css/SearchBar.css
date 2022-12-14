@@ -55,7 +55,7 @@
 }
 
 .label-container .input-radio:checked ~ .checkmark {
-  background-color: #502314;
+  background-color: #a3523d;
 }
 
 .checkmark:after {
@@ -65,7 +65,7 @@
 }
 
 .label-container .checkmark:after {
-  background: #ff8233;
+  background: #ffda33;
   border-radius: 50%;
   height: 0.45rem;
   left: 0.38rem;
@@ -78,9 +78,9 @@
 }
 
 .search-btn {
-  background-color: #502314;
+  background-color: #a3523d;
   border-radius: 4px;
-  color: #ff8233;
+  color: #ffda33;
   cursor: pointer;
   font-weight: 700;
   letter-spacing: 0.8px;
@@ -89,7 +89,7 @@
 }
 
 .search-btn:hover {
-  background-color: #502314cb;
-  color: #ff8233cb;
+  background-color: #a3523dcb;
+  color: #ffda33cb;
 }
 

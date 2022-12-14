@@ -37,7 +37,7 @@ export default function FavoriteRecipe() {
   };
 
   const shareButton = (id, type) => {
-    const time = 2000;
+    const time = 1000;
     setLinkCopied(true);
 
     if (type === 'food') {

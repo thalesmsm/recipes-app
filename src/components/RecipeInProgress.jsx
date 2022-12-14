@@ -22,7 +22,7 @@ export default function RecipeInProgress({ recipeProgress }) {
   const pathnameFoods = history.location.pathname.includes('/foods');
 
   const shareButton = () => {
-    const time = 2000;
+    const time = 1000;
     setLinkCopied(true);
 
     if (pathnameFoods) {

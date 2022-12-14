@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import logo from '../images/logo.png';
 import '../css/Login.css';
 
 export default function Login() {
@@ -43,7 +44,8 @@ export default function Login() {
   return (
     <div className="form-container">
       <form>
-        <h1>RECIPES</h1>
+        {/* <h1>Cook n&apos; Drink</h1> */}
+        <img src={ logo } alt="logo" className="cook" />
         <div className="inputs-container">
           <input
             data-testid="email-input"

@@ -24,6 +24,7 @@ export default function Recipes({ recipeF, index }) {
         >
           { recipeF.strMeal ?? recipeF.strDrink }
         </h2>
+        <div className="rec" />
       </div>
     </Link>
   );

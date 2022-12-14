@@ -11,7 +11,8 @@
 
 .header {
   align-items: center;
-  background-color: #ff8233;
+  /* background-image: linear-gradient(to top, #E49A53, #A3523D); */
+  background-color: #E49A53;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.39);
   display: flex;
   justify-content: space-between;

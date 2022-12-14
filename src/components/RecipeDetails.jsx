@@ -59,7 +59,7 @@ export default function RecipeDetails() {
   };
 
   const shareButton = () => {
-    const time = 2000;
+    const time = 1000;
     setLinkCopied(true);
 
     if (pathnameFoods) {
